@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<openerp>
+<data noupdate="1">
+
+	#
+	# Sequences for orden_compra_diaria
+
+	<record model="ir.sequence.type" id="seq_type_compra_diaria">
+		<field name="name">Codigo de Compra Diaria</field>
+		<field name="code">orden_compra_diaria</field>
+	</record>
+	<record model="ir.sequence" id="seq_compra_diaria">
+		<field name="name">Codigo de Orden Compra Diaria</field>
+		<field name="code">orden_compra_diaria</field>
+		<field name="prefix">OC</field>
+		<field name="padding">5</field>
+	</record>
+
+</data>
+</openerp>

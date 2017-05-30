@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <template id="report_produccion_semanal_document">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <style>table, td, th {
+              border: 1px solid black; 
+              text-align:center;
+              font-size: 16px; 
+            }
+
+            table {
+              border-collapse: collapse;
+              width: 100%;
+            }
+
+            td {
+              vertical-align: center;
+              font-size: 16px; 
+            }</style>
+                    <!-- Variables -->
+                    <t t-set="cantidad_aluminio" t-value="0" />
+                    <t t-set="compra_aluminio" t-value="0" />
+                    <t t-set="inversion_aluminio" t-value="0" />
+                    <t t-set="cantidad_chatarra" t-value="0" />
+                    <t t-set="compra_chatarra" t-value="0" />
+                    <t t-set="inversion_chatarra" t-value="0" />
+                    <t t-set="cantidad_papel_periodico" t-value="0" />
+                    <t t-set="compra_papel_periodico" t-value="0" />
+                    <t t-set="inversion_papel_periodico" t-value="0" />
+                    <t t-set="cantidad_papel_primera" t-value="0" />
+                    <t t-set="compra_papel_primera" t-value="0" />
+                    <t t-set="inversion_papel_primera" t-value="0" />
+                    <t t-set="cantidad_papel_segunda" t-value="0" />
+                    <t t-set="compra_papel_segunda" t-value="0" />
+                    <t t-set="inversion_papel_segunda" t-value="0" />
+                    <t t-set="cantidad_plastico_pet" t-value="0" />
+                    <t t-set="compra_plastico_pet" t-value="0" />
+                    <t t-set="inversion_plastico_pet" t-value="0" />
+                    <t t-set="cantidad_tetrabrick" t-value="0" />
+                    <t t-set="compra_tetrabrick" t-value="0" />
+                    <t t-set="inversion_tetrabrick" t-value="0" />
+                    <t t-set="cantidad_bolsa_plastica" t-value="0" />
+                    <t t-set="compra_bolsa_plastica" t-value="0" />
+                    <t t-set="inversion_bolsa_plastica" t-value="0" />
+                    <!-- Fin de Variables -->
+                    <!-- Procesamiento de Productos -->
+                    <t t-foreach="o.orden_compra_ids" t-as="i">
+                        <t t-foreach="i.linea_compra_ids" t-as="b">
+                            <t t-if="b.product_id.name == 'Aluminio' ">
+                                <t t-set="cantidad_aluminio" t-value="cantidad_aluminio + b.cantidad" />
+                                <t t-set="inversion_aluminio" t-value="inversion_aluminio + b.sub_total" />
+                                <t t-set="compra_aluminio" t-value="inversion_aluminio / cantidad_aluminio" />
+                            </t>
+                            <t t-if="b.product_id.name == 'Bolsa Plastica' ">
+                                <t t-set="cantidad_bolsa_plastica" t-value="cantidad_bolsa_plastica + b.cantidad" />
+                                <t t-set="inversion_bolsa_plastica" t-value="inversion_bolsa_plastica + b.sub_total" />
+                                <t t-set="compra_bolsa_plastica" t-value="inversion_bolsa_plastica / cantidad_bolsa_plastica" />
+                            </t>
+                            <t t-if="b.product_id.name == 'Chatarra' ">
+                                <t t-set="cantidad_chatarra" t-value="cantidad_chatarra + b.cantidad" />
+                                <t t-set="inversion_chatarra" t-value="inversion_chatarra + b.sub_total" />
+                                <t t-set="compra_chatarra" t-value="inversion_chatarra / cantidad_chatarra" />
+                            </t>
+                            <t t-if="b.product_id.name == 'Papel Periodico' ">
+                                <t t-set="cantidad_papel_periodico" t-value="cantidad_papel_periodico + b.cantidad" />
+                                <t t-set="inversion_papel_periodico" t-value="inversion_papel_periodico + b.sub_total" />
+                                <t t-set="compra_papel_periodico" t-value="inversion_papel_periodico / cantidad_papel_periodico" />
+                            </t>
+                            <t t-if="b.product_id.name == 'Papel Primera' ">
+                                <t t-set="cantidad_papel_primera" t-value="cantidad_papel_primera + b.cantidad" />
+                                <t t-set="inversion_papel_primera" t-value="inversion_papel_primera + b.sub_total" />
+                                <t t-set="compra_papel_primera" t-value="inversion_papel_primera / cantidad_papel_primera" />
+                            </t>
+                            <t t-if="b.product_id.name == 'Papel Segunda' ">
+                                <t t-set="cantidad_papel_segunda" t-value="cantidad_papel_segunda + b.cantidad" />
+                                <t t-set="inversion_papel_segunda" t-value="inversion_papel_segunda + b.sub_total" />
+                                <t t-set="compra_papel_segunda" t-value="inversion_papel_segunda / cantidad_papel_segunda" />
+                            </t>
+                            <t t-if="b.product_id.name == 'Tetrabrick' ">
+                                <t t-set="cantidad_tetrabrick" t-value="cantidad_tetrabrick + b.cantidad" />
+                                <t t-set="inversion_tetrabrick" t-value="inversion_tetrabrick + b.sub_total" />
+                                <t t-set="compra_tetrabrick" t-value="inversion_tetrabrick / cantidad_tetrabrick" />
+                            </t>
+                        </t>
+                    </t>
+                    <!-- Fin Procesamiento de Productos -->
+                    <div align="center">
+                        <h4>
+                            Produccion Semanal
+                            <span t-field="o.fecha_inicio" />
+                            al
+                            <span t-field="o.fecha_final" />
+                        </h4>
+                    </div>
+                    <!-- Resumen Semanal-->
+                    <table style="border: 2px solid black; text-align: center; align=center; width:100%">
+                        <tr>
+                            <th colspan="4" style="text-align: center; background-color: #D8D8D8; border: 2px solid black">Detalles de compra por producto</th>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center;border: 2px solid black">Producto</th>
+                            <th style="text-align: center;border: 2px solid black">Cantidad</th>
+                            <th style="text-align: center;border: 2px solid black">Precio Compra</th>
+                            <th style="text-align: center;border: 2px solid black">Total</th>
+                        </tr>
+                        <t t-if="cantidad_aluminio &gt; 0 ">
+                            <tr>
+                                <td style="text-align: center;border: 2px solid black">Aluminio</td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_aluminio" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    ₡
+                                    <t t-esc="'{0:,.2f}'.format(int(compra_aluminio))" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    ₡
+                                    <t t-esc="'{0:,.2f}'.format(int(inversion_aluminio))" />
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="cantidad_chatarra &gt; 0 ">
+                            <tr>
+                                <td style="text-align: center;border: 2px solid black">Chatarra</td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_chatarra" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    ₡
+                                    <t t-esc="'{0:,.2f}'.format(int(compra_chatarra))" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    ₡
+                                    <t t-esc="'{0:,.2f}'.format(int(inversion_chatarra))" />
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="cantidad_bolsa_plastica &gt; 0 ">
+                            <tr>
+                                <td style="text-align: center;border: 2px solid black">Bolsa Plastica</td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_bolsa_plastica" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    ₡
+                                    <t t-esc="'{0:,.2f}'.format(int(compra_bolsa_plastica))" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    ₡
+                                    <t t-esc="'{0:,.2f}'.format(int(inversion_bolsa_plastica))" />
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="cantidad_papel_periodico &gt; 0 ">
+                            <tr>
+                                <td style="text-align: center;border: 2px solid black">Papel Periodico</td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_papel_periodico" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    ₡
+                                    <t t-esc="'{0:,.2f}'.format(int(compra_papel_periodico))" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    ₡
+                                    <t t-esc="'{0:,.2f}'.format(int(inversion_papel_periodico))" />
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="cantidad_papel_primera &gt; 0 ">
+                            <tr>
+                                <td style="text-align: center;border: 2px solid black">Papel Primera</td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_papel_primera" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    ₡
+                                    <t t-esc="'{0:,.2f}'.format(int(compra_papel_primera))" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    ₡
+                                    <t t-esc="'{0:,.2f}'.format(int(inversion_papel_primera))" />
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="cantidad_papel_segunda &gt; 0 ">
+                            <tr>
+                                <td style="text-align: center;border: 2px solid black">Papel Segunda</td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_papel_segunda" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    ₡
+                                    <t t-esc="'{0:,.2f}'.format(int(compra_papel_segunda))" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    ₡
+                                    <t t-esc="'{0:,.2f}'.format(int(inversion_papel_segunda))" />
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="cantidad_tetrabrick &gt; 0 ">
+                            <tr>
+                                <td style="text-align: center;border: 2px solid black">Tetrabrick</td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_tetrabrick" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    ₡
+                                    <t t-esc="'{0:,.2f}'.format(int(compra_tetrabrick))" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    ₡
+                                    <t t-esc="'{0:,.2f}'.format(int(inversion_tetrabrick))" />
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-set="total_compras" t-value="inversion_chatarra + inversion_aluminio + inversion_papel_primera + inversion_papel_segunda + inversion_papel_periodico + inversion_plastico_pet + inversion_tetrabrick + inversion_bolsa_plastica" />
+                        <tr>
+                            <th colspan="3" style="text-align: center; background-color: #D8D8D8; border: 2px solid black">TOTAL</th>
+                            <th style="text-align: center; background-color: #D8D8D8; border: 2px solid black">
+                                ₡
+                                <t t-esc="'{0:,.2f}'.format(int(total_compras))" />
+                            </th>
+                        </tr>
+                    </table>
+                    <div style="height: 40px;" />
+                    <!-- Variables Resumen Prestamos -->
+                    <t t-set="total_prestamos" t-value="0" />
+                    <t t-set="total_abonos" t-value="0" />
+                    <t t-set="total_saldos" t-value="0" />
+                    <table>
+                        <tr>
+                            <th style="text-align: center; background-color: #D8D8D8; border: 2px solid black" colspan="8">Resumen de Prestamos</th>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center; border: 2px solid black">Empleado</th>
+                            <th style="text-align: center; border: 2px solid black">Monto</th>
+                            <th style="text-align: center; border: 2px solid black">Abono</th>
+                            <th style="text-align: center; border: 2px solid black">Saldo</th>
+                        </tr>
+                        <t t-foreach="o.orden_compra_ids.sorted(key=lambda b: b.empleado_id.name)" t-as="i">
+                            <t t-if="i.saldo_prestamo &gt; 0 ">
+                                <t t-set="total_prestamos" t-value="total_prestamos + i.monto_prestamo" />
+                                <t t-set="total_abonos" t-value="total_abonos + i.abono_prestamo" />
+                                <t t-set="total_saldos" t-value="total_saldos + i.saldo_prestamo" />
+                                <t t-if=" i.saldo_prestamo &gt; 0 ">
+                                    <tr>
+                                        <td style="text-align: left;border: 2px solid black">
+                                            <t t-esc="i.empleado_id.name" />
+                                        </td>
+                                        <td style="text-align: center;border: 2px solid black">
+                                            ₡
+                                            <t t-esc="'{0:,.2f}'.format(int(i.monto_prestamo))" />
+                                        </td>
+                                        <td style="text-align: center;border: 2px solid black">
+                                            ₡
+                                            <t t-esc="'{0:,.2f}'.format(int(i.abono_prestamo))" />
+                                        </td>
+                                        <td style="text-align: center;border: 2px solid black">
+                                            ₡
+                                            <t t-esc="'{0:,.2f}'.format(int(i.saldo_prestamo))" />
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </t>
+                        <tr>
+                            <th style="text-align: center; background-color: #D8D8D8; border: 2px solid black">Total</th>
+                            <th style="text-align: center; background-color: #D8D8D8; border: 2px solid black">
+                                ₡
+                                <t t-esc="'{0:,.2f}'.format(int(total_prestamos))" />
+                            </th>
+                            <th style="text-align: center; background-color: #D8D8D8; border: 2px solid black">
+                                ₡
+                                <t t-esc="'{0:,.2f}'.format(int(total_abonos))" />
+                            </th>
+                            <th style="text-align: center; background-color: #D8D8D8; border: 2px solid black">
+                                ₡
+                                <t t-esc="'{0:,.2f}'.format(int(total_saldos))" />
+                            </th>
+                        </tr>
+                    </table>
+                    <br />
+                </div>
+            </t>
+        </template>
+    </data>
+</openerp>
+

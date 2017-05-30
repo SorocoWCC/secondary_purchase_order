@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- Action Orden de Compra -->
+        <record id="orden_compra_action" model="ir.actions.act_window">
+            <field name="name">Linea de Compras</field>
+            <field name="res_model">orden_compra</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Presione aquí para crear un nuevo PO.</p>
+            </field>
+        </record>
+        <!-- Action Produccion Semanal -->
+        <record id="produccion_semanal_action" model="ir.actions.act_window">
+            <field name="name">Produccion Semanal</field>
+            <field name="res_model">produccion_semanal</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Presione aquí para crear una Produccion Semanal Nueva</p>
+            </field>
+        </record>
+        <!-- Form View Orden de Compra -->
+        <record id="orden_compra_form_view" model="ir.ui.view">
+            <field name="name">orden_compra.form.view</field>
+            <field name="view_type">form</field>
+            <field name="model">orden_compra</field>
+            <field name="arch" type="xml">
+                <form string="Libro" version="7.0">
+                    <header />
+                    <sheet string="Libro de Prestamos">
+                        <div class="oe_title">
+                            <h1>
+                                <label string="Pedido de Compra" />
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="empleado_id" />
+                                <field name="fecha_pedido" />
+                            </group>
+                            <group>
+                                <field name="produccion_semanal_id" domain="[('state','=','progress')]"/>
+                            </group>
+                        </group>
+                        <group>
+                            <label for="name" />
+                        </group>
+                        <group>/&gt;</group>
+                        <notebook colspan="4">
+                            <page string="Productos">
+                                <field name="linea_compra_ids">
+                                    <tree string="Lineas de pedido de Compra" editable="bottom">
+                                        <field name="product_id" />
+                                        <field name="cantidad" />
+                                        <field name="precio" />
+                                        <field name="fecha" />
+                                        <field name="sub_total" />
+                                    </tree>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right">
+                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                        <label for="total" />
+                                    </div>
+                                    <field name="total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}" />
+                                </group>
+                                <div class="oe_clear" />
+                                <field name="notas" class="oe_inline" placeholder="Terms and conditions..." />
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+        <!--Form View Produccion Semanal-->
+        <record id="planilla_form_view" model="ir.ui.view">
+            <field name="name">produccion_semanal.form.view</field>
+            <field name="view_type">form</field>
+            <field name="model">produccion_semanal</field>
+            <field name="arch" type="xml">
+                <form string="Produccion Semanal" version="7.0">
+                    <header>
+                        <button name="action_estado_planilla" string="Cerrar Planilla" type="object" attrs="{'invisible': ['|', ('state','=','closed'), ('state','=','new')]}" class="oe_highlight" />
+                        <button name="action_generar_lista" string="Generar Lista" type="object" attrs="{'invisible': ['|', ('state','=','closed'), ('state','=','progress')]}" class="oe_highlight" />
+                        <field name="state" widget="statusbar" statusbar_colors="{&amp;quot;new&amp;quot;:&amp;quot;red&amp;quot;,&amp;quot;closed&amp;quot;:&amp;quot;blue&amp;quot;}" />
+                    </header>
+                    <sheet class="oe_form_sheet_width " string="Planilla">
+                        <group>
+                            <group>
+                                <field name="fecha_inicio" attrs="{'readonly': ['|', ('state','=','closed')]}" />
+                                <field name="fecha_final" attrs="{'readonly': ['|', ('state','=','closed')]}" />
+                            </group>
+                            <group>
+                                <field name="hr_department_id" attrs="{'readonly': ['|', ('state','=','closed')]}" />
+                                <field name="total_planilla" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Personal de Producción">
+                                <field name="orden_compra_ids" attrs="{'readonly': ['|', ('state','=','closed')]}" />
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Inherit Form  View Producto -->
+        <record model="ir.ui.view" id="product_template_sencodary_view_form">
+            <field name="name">product_template_secondary_view_form_inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="purchase_order_modifications.product_template_view_form" />
+            <field name="arch" type="xml">
+                <field name="calcular" position="after">
+                    <field name="precio_venta_produccion" />
+                </field>
+            </field>
+        </record> 
+        <!--Tree View Produccion Semanal-->
+        <record id="produccion_semanal_tree_view" model="ir.ui.view">
+            <field name="name">produccion_semanal_tree_view</field>
+            <field name="view_type">tree</field>
+            <field name="model">produccion_semanal</field>
+            <field name="arch" type="xml">
+                <tree string="Produccion Semanal" colors="blue:state == 'new';blue:state == 'progress';black:state in ('closed');">
+                    <field name="fecha_inicio" />
+                    <field name="fecha_final" />
+                    <field name="hr_department_id" />
+                    <field name="total_planilla" />
+                    <field name="state" string="Estado" />
+                </tree>
+            </field>
+        </record>
+        <!--Tree view Orden Compra-->
+        <record id="orden_compra_tree_view" model="ir.ui.view">
+            <field name="name">orden_compra_tree_view</field>
+            <field name="view_type">tree</field>
+            <field name="model">orden_compra</field>
+            <field name="arch" type="xml">
+                <tree string="Orden de Compra" default_order="fecha_pedido">
+                    <field name="name" />
+                    <field name="fecha_pedido" />
+                    <field name="empleado_id" />
+                    <field name="total" />
+                </tree>
+            </field>
+        </record>
+        <!--Group by and filter by -->
+        <record id="secondary_purchase_order_search_view" model="ir.ui.view">
+            <field name="name">Filtros y Grupos Produccion Semanal</field>
+            <field name="model">produccion_semanal</field>
+            <field name="arch" type="xml">
+                <search string="Produccion Semanal">
+                    <group string="Agrupar Por">
+                        <filter string="Fecha Inicio" icon="terp-go-today" context="{'group_by':'fecha_inicio'}" help="Agrupar por Fecha Inicio" />
+                        <filter string="Fecha Final" icon="terp-go-today" context="{'group_by':'fecha_final'}" help="Agrupar por Fecha Final" />
+                        <filter string="Estado" icon="terp-go-today" context="{'group_by':'state'}" help="Agrupar por Estado" />
+                        <filter string="Empleado" icon="terp-go-today" context="{'group_by':'hr_department_id'}" help="Departamento" />
+                    </group>
+                    <group string="Filtrar Por">
+                        <filter string="Fecha Inicio" icon="terp-go-today" context="{'filter_by':'fecha_inicio'}" help="Agrupar por Fecha Inicio" />
+                        <filter string="fecha Final" icon="terp-go-today" context="{'filter_by':'fecha_final'}" help="Agrupar por Fecha Final" />
+                        <filter string="Estado" icon="terp-go-today" context="{'filter_by':'state'}" help="Agrupar por Estado" />
+                        <filter string="Departamento" icon="terp-go-today" context="{'filter_by':'hr_department_id'}" help="Departamento" />
+                    </group>
+                </search>
+            </field>
+        </record>
+        <!-- Menus -->
+        <menuitem id="menu_produccion_semanal" name="Compras por produccion" parent="base.menu_purchase_root" sequence="40" />
+        <menuitem id="produccion_semanal_menu" name="Produccion Semanal" parent="menu_produccion_semanal" action="produccion_semanal_action" />
+    </data>
+</openerp>
