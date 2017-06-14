@@ -34,6 +34,27 @@
                             <h1>
                                 <label string="Pedido de Compra" />
                             </h1>
+
+                            <button name="_action_production_diaria" type="action" class="oe_inline oe_stat_button"  attrs="{'invisible': [('prod_lunes','=','0')]}">
+                                <field name="prod_lunes" widget="statinfo" />
+                            </button>
+
+                            <button name="_action_production_diaria" type="action" class="oe_inline oe_stat_button" attrs="{'invisible': [('prod_martes','==','0')]}">
+                                <field name="prod_martes" widget="statinfo" />
+                            </button>
+
+                            <button name="_action_production_diaria" type="action" class="oe_inline oe_stat_button"  attrs="{'invisible': [('prod_miercoles','=','0')]}">
+                                <field name="prod_miercoles" widget="statinfo" />
+                            </button>
+
+                            <button name="_action_production_diaria" type="action" class="oe_inline oe_stat_button" attrs="{'invisible': [('prod_jueves','=','0')]}">
+                                <field name="prod_jueves" widget="statinfo" />
+                            </button>
+
+                            <button name="_action_production_diaria" type="action" class="oe_inline oe_stat_button"  attrs="{'invisible': [('prod_viernes','=','0')]}">
+                                <field name="prod_viernes" widget="statinfo" />
+                            </button>
+
                         </div>
                         <group>
                             <group>

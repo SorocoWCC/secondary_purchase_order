@@ -24,7 +24,7 @@ class linea_compra(models.Model):
     product_id = fields.Many2one(comodel_name='product.product', string='Producto', delegate=True)
     cantidad = fields.Float('Cantidad', required=True, default=1)
     precio = fields.Float('Precio Unidad', required=True)
-    fecha = fields.Date(string='Fecha', readonly=True)
+    fecha = fields.Date(string='Fecha')
     _defaults = {
     'fecha': fields.Date.today(), 
     }
@@ -55,6 +55,11 @@ class orden_compra(models.Model):
     saldo_prestamo = fields.Float(string='Saldo Prestamos')
     monto_prestamo = fields.Float(string='Total Prestamo')
     abono_prestamo = fields.Float(string='Abono Prestamo')
+    prod_lunes = fields.Float(compute='_action_production_diaria', store=True, string='Lunes')
+    prod_martes = fields.Float(compute='_action_production_diaria', store=True, string='Martes')
+    prod_miercoles = fields.Float(compute='_action_production_diaria', store=True, string='Miercoles')
+    prod_jueves = fields.Float(compute='_action_production_diaria', store=True, string='Jueves')
+    prod_viernes = fields.Float(compute='_action_production_diaria', store=True, string='Viernes')
     _defaults = { 
     'fecha_pedido' : fields.Datetime.now()
     }
@@ -70,6 +75,56 @@ class orden_compra(models.Model):
     @api.model
     def _action_aceite(self):
         return str(self.env['ir.sequence'].next_by_code('orden_compra_diaria'))
+ 
+    @api.one
+    @api.depends('linea_compra_ids')
+    def _action_production_diaria(self):
+        # Obtiene la lista de todas las fechas
+        lista_fechas = []
+        for i in self.linea_compra_ids:
+            if i.fecha not in lista_fechas:
+                lista_fechas.append(i.fecha)
+
+        # Calcula la produccion del Lunes
+        if len(lista_fechas) >= 1:
+            prod_diaria = 0
+            for i in self.linea_compra_ids:
+                if i.fecha == str(sorted(lista_fechas)[0]) and i.sub_total > 0 :
+                    print "----------> " + str(i.product_id.name)
+                    prod_diaria += i.sub_total 
+            self.prod_lunes = prod_diaria
+
+        # Calcula la produccion del Martes
+        if len(lista_fechas) >= 2:
+            prod_diaria = 0
+            for i in self.linea_compra_ids:
+                if i.fecha == str(sorted(lista_fechas)[1]) and i.sub_total > 0 :
+                    prod_diaria += i.sub_total 
+            self.prod_martes = prod_diaria
+
+        # Calcula la produccion del Miercoles
+        if len(lista_fechas) >= 3:
+            prod_diaria = 0
+            for i in self.linea_compra_ids:
+                if i.fecha == str(sorted(lista_fechas)[2]) and i.sub_total > 0 :
+                    prod_diaria += i.sub_total 
+            self.prod_miercoles = prod_diaria
+
+        # Calcula la produccion del Jueves
+        if len(lista_fechas) >= 4:
+            prod_diaria = 0
+            for i in self.linea_compra_ids:
+                if i.fecha == str(sorted(lista_fechas)[3]) and i.sub_total > 0 :
+                    prod_diaria += i.sub_total 
+            self.prod_jueves = prod_diaria
+
+        # Calcula la produccion del Viernes
+        if len(lista_fechas) >= 5:
+            prod_diaria = 0
+            for i in self.linea_compra_ids:
+                if i.fecha == str(sorted(lista_fechas)[4]) and i.sub_total > 0 :
+                    prod_diaria += i.sub_total 
+            self.prod_viernes = prod_diaria
 
 # Clase Produccion semanal
 class produccion_semanal(models.Model):

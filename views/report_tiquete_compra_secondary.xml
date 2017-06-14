@@ -140,6 +140,10 @@
                                  <t t-set="cantidad_papel_segunda" t-value="cantidad_papel_segunda + b.cantidad" />
                                  <t t-set="compra_papel_segunda" t-value="compra_papel_segunda + (b.cantidad * b.precio)"  />
                               </t>
+                              <t t-if="b.product_id.name  == 'Plastico Pet' ">
+                                 <t t-set="cantidad_plastico_pet" t-value="cantidad_plastico_pet + b.cantidad" />
+                                 <t t-set="compra_plastico_pet" t-value="compra_plastico_pet + (b.cantidad * b.precio)"  />
+                              </t>
                               <t t-if="b.product_id.name  == 'Tetrabrick' ">
                                  <t t-set="cantidad_tetrabrick" t-value="cantidad_tetrabrick + b.cantidad" />
                                  <t t-set="compra_tetrabrick" t-value="compra_tetrabrick + (b.cantidad * b.precio)"  />
@@ -224,6 +228,19 @@
                                         <td >
                                             ₡
                                             <t t-esc="'{0:,.2f}'.format(int(compra_papel_segunda))" />
+                                        </td>
+
+                                    </tr>
+                                </t>
+                                <t t-if="cantidad_plastico_pet > 0 ">
+                                    <tr>
+                                        <td >Plastico Pet</td>
+                                        <td >
+                                            <t t-esc="cantidad_plastico_pet" />
+                                        </td>
+                                        <td >
+                                            ₡
+                                            <t t-esc="'{0:,.2f}'.format(int(compra_plastico_pet))" />
                                         </td>
 
                                     </tr>
@@ -336,6 +353,7 @@
                                  <br />
                                  Firma Proveedor
                                  <br />
+                                 <div style="height: 50px; "/>
                               </div>
                               <p style="page-break-after:always;" />
                            </div>
