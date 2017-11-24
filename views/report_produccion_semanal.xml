@@ -25,6 +25,19 @@
                     <t t-set="inversion_aluminio" t-value="0" />
                     <t t-set="cantidad_chatarra" t-value="0" />
                     <t t-set="compra_chatarra" t-value="0" />
+                    <t t-set="cantidad_bronce" t-value="0" />
+                    <t t-set="compra_bronce" t-value="0" />
+                    <t t-set="inversion_bronce" t-value="0" />
+                    <t t-set="cantidad_cobre" t-value="0" />
+                    <t t-set="compra_cobre" t-value="0" />
+                    <t t-set="cantidad_cobre" t-value="0" />
+                    <t t-set="inversion_cobre" t-value="0" />
+                    <t t-set="cantidad_bateria" t-value="0" />
+                    <t t-set="compra_bateria" t-value="0" />
+                    <t t-set="inversion_bateria" t-value="0" />
+                    <t t-set="cantidad_tar_comp" t-value="0" />
+                    <t t-set="compra_tar_comp" t-value="0" />
+                    <t t-set="inversion_tar_comp" t-value="0" />
                     <t t-set="inversion_chatarra" t-value="0" />
                     <t t-set="cantidad_papel_periodico" t-value="0" />
                     <t t-set="compra_papel_periodico" t-value="0" />
@@ -53,15 +66,30 @@
                                 <t t-set="inversion_aluminio" t-value="inversion_aluminio + b.sub_total" />
                                 <t t-set="compra_aluminio" t-value="inversion_aluminio / cantidad_aluminio" />
                             </t>
+                            <t t-if="b.product_id.name == 'Bateria' ">
+                                <t t-set="cantidad_bateria" t-value="cantidad_bateria + b.cantidad" />
+                                <t t-set="inversion_bateria" t-value="inversion_bateria + b.sub_total" />
+                                <t t-set="compra_bateria" t-value="inversion_bateria / cantidad_bateria" />
+                            </t>
                             <t t-if="b.product_id.name == 'Bolsa Plastica' ">
                                 <t t-set="cantidad_bolsa_plastica" t-value="cantidad_bolsa_plastica + b.cantidad" />
                                 <t t-set="inversion_bolsa_plastica" t-value="inversion_bolsa_plastica + b.sub_total" />
                                 <t t-set="compra_bolsa_plastica" t-value="inversion_bolsa_plastica / cantidad_bolsa_plastica" />
                             </t>
+                            <t t-if="b.product_id.name == 'Bronce' ">
+                                <t t-set="cantidad_bronce" t-value="cantidad_bronce + b.cantidad" />
+                                <t t-set="inversion_bronce" t-value="inversion_bronce + b.sub_total" />
+                                <t t-set="compra_bronce" t-value="inversion_bronce / cantidad_bronce" />
+                            </t>
                             <t t-if="b.product_id.name == 'Chatarra' ">
                                 <t t-set="cantidad_chatarra" t-value="cantidad_chatarra + b.cantidad" />
                                 <t t-set="inversion_chatarra" t-value="inversion_chatarra + b.sub_total" />
                                 <t t-set="compra_chatarra" t-value="inversion_chatarra / cantidad_chatarra" />
+                            </t>
+                            <t t-if="b.product_id.name == 'Cobre' ">
+                                <t t-set="cantidad_cobre" t-value="cantidad_cobre + b.cantidad" />
+                                <t t-set="inversion_cobre" t-value="inversion_cobre + b.sub_total" />
+                                <t t-set="compra_cobre" t-value="inversion_cobre / cantidad_cobre" />
                             </t>
                             <t t-if="b.product_id.name == 'Papel Periodico' ">
                                 <t t-set="cantidad_papel_periodico" t-value="cantidad_papel_periodico + b.cantidad" />
@@ -82,6 +110,11 @@
                                 <t t-set="cantidad_plastico_pet" t-value="cantidad_plastico_pet + b.cantidad" />
                                 <t t-set="inversion_plastico_pet" t-value="inversion_plastico_pet + b.sub_total" />
                                 <t t-set="compra_plastico_pet" t-value="inversion_plastico_pet / cantidad_plastico_pet" />
+                            </t>
+                            <t t-if="b.product_id.name == 'Tar_Comp' ">
+                                <t t-set="cantidad_tar_comp" t-value="cantidad_tar_comp + b.cantidad" />
+                                <t t-set="inversion_tar_comp" t-value="inversion_tar_comp + b.sub_total" />
+                                <t t-set="compra_tar_comp" t-value="inversion_tar_comp / cantidad_tar_comp" />
                             </t>
                             <t t-if="b.product_id.name == 'Tetrabrick' ">
                                 <t t-set="cantidad_tetrabrick" t-value="cantidad_tetrabrick + b.cantidad" />
@@ -126,6 +159,38 @@
                                 </td>
                             </tr>
                         </t>
+                        <t t-if="cantidad_bateria &gt; 0 ">
+                            <tr>
+                                <td style="text-align: center;border: 2px solid black">Bateria</td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_bateria" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    ₡
+                                    <t t-esc="'{0:,.2f}'.format(int(compra_bateria))" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    ₡
+                                    <t t-esc="'{0:,.2f}'.format(int(inversion_bateria))" />
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="cantidad_bronce &gt; 0 ">
+                            <tr>
+                                <td style="text-align: center;border: 2px solid black">Bronce</td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_bronce" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    ₡
+                                    <t t-esc="'{0:,.2f}'.format(int(compra_bronce))" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    ₡
+                                    <t t-esc="'{0:,.2f}'.format(int(inversion_bronce))" />
+                                </td>
+                            </tr>
+                        </t>
                         <t t-if="cantidad_chatarra &gt; 0 ">
                             <tr>
                                 <td style="text-align: center;border: 2px solid black">Chatarra</td>
@@ -139,6 +204,22 @@
                                 <td style="text-align: center;border: 2px solid black">
                                     ₡
                                     <t t-esc="'{0:,.2f}'.format(int(inversion_chatarra))" />
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="cantidad_cobre &gt; 0 ">
+                            <tr>
+                                <td style="text-align: center;border: 2px solid black">Cobre</td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_cobre" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    ₡
+                                    <t t-esc="'{0:,.2f}'.format(int(compra_cobre))" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    ₡
+                                    <t t-esc="'{0:,.2f}'.format(int(inversion_cobre))" />
                                 </td>
                             </tr>
                         </t>

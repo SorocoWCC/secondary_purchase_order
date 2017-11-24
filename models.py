@@ -55,11 +55,11 @@ class orden_compra(models.Model):
     saldo_prestamo = fields.Float(string='Saldo Prestamos')
     monto_prestamo = fields.Float(string='Total Prestamo')
     abono_prestamo = fields.Float(string='Abono Prestamo')
-    prod_lunes = fields.Float(compute='_action_production_diaria', store=True, string='Lunes')
-    prod_martes = fields.Float(compute='_action_production_diaria', store=True, string='Martes')
-    prod_miercoles = fields.Float(compute='_action_production_diaria', store=True, string='Miercoles')
-    prod_jueves = fields.Float(compute='_action_production_diaria', store=True, string='Jueves')
-    prod_viernes = fields.Float(compute='_action_production_diaria', store=True, string='Viernes')
+    prod_lunes = fields.Float(compute='_action_production_diaria', store=True, string='Dia 1')
+    prod_martes = fields.Float(compute='_action_production_diaria', store=True, string='Dia 2')
+    prod_miercoles = fields.Float(compute='_action_production_diaria', store=True, string='Dia 3')
+    prod_jueves = fields.Float(compute='_action_production_diaria', store=True, string='Dia 4')
+    prod_viernes = fields.Float(compute='_action_production_diaria', store=True, string='Dia 5')
     _defaults = { 
     'fecha_pedido' : fields.Datetime.now()
     }
@@ -90,7 +90,6 @@ class orden_compra(models.Model):
             prod_diaria = 0
             for i in self.linea_compra_ids:
                 if i.fecha == str(sorted(lista_fechas)[0]) and i.sub_total > 0 :
-                    print "----------> " + str(i.product_id.name)
                     prod_diaria += i.sub_total 
             self.prod_lunes = prod_diaria
 

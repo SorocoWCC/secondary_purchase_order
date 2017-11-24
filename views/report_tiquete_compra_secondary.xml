@@ -97,6 +97,14 @@
                            <t t-set="compra_aluminio" t-value="0" />
                            <t t-set="cantidad_chatarra" t-value="0" />
                            <t t-set="compra_chatarra" t-value="0" />
+                           <t t-set="cantidad_cobre" t-value="0" />
+                           <t t-set="compra_cobre" t-value="0" />
+                           <t t-set="cantidad_bateria" t-value="0" />
+                           <t t-set="compra_bateria" t-value="0" />
+                           <t t-set="cantidad_tar_comp" t-value="0" />
+                           <t t-set="compra_tar_comp" t-value="0" />
+                           <t t-set="cantidad_bronce" t-value="0" />
+                           <t t-set="compra_bronce" t-value="0" />
                            <t t-set="cantidad_papel_periodico" t-value="0" />
                            <t t-set="compra_papel_periodico" t-value="0" />
                            <t t-set="cantidad_papel_primera" t-value="0" />
@@ -116,9 +124,26 @@
                            <!-- Fin de Variables -->
                            <!-- Procesamiento de Productos -->
                            <t t-foreach="i.linea_compra_ids" t-as="b">
+
                               <t t-if="b.product_id.name  == 'Aluminio' ">
                                  <t t-set="cantidad_aluminio" t-value="cantidad_aluminio + b.cantidad" />
                                  <t t-set="compra_aluminio" t-value="compra_aluminio + (b.cantidad * b.precio)" />
+                              </t>
+                              <t t-if="b.product_id.name  == 'Bronce' ">
+                                 <t t-set="cantidad_bronce" t-value="cantidad_bronce + b.cantidad" />
+                                 <t t-set="compra_bronce" t-value="compra_bronce + (b.cantidad * b.precio)" />
+                              </t>
+                              <t t-if="b.product_id.name  == 'Cobre' ">
+                                 <t t-set="cantidad_cobre" t-value="cantidad_cobre + b.cantidad" />
+                                 <t t-set="compra_cobre" t-value="compra_cobre + (b.cantidad * b.precio)" />
+                              </t>
+                              <t t-if="b.product_id.name  == 'Bateria' ">
+                                 <t t-set="cantidad_bateria" t-value="cantidad_bateria + b.cantidad" />
+                                 <t t-set="compra_bateria" t-value="compra_bateria + (b.cantidad * b.precio)" />
+                              </t>
+                              <t t-if="b.product_id.name  == 'Tar_Comp' ">
+                                 <t t-set="cantidad_tar_comp" t-value="cantidad_tar_comp + b.cantidad" />
+                                 <t t-set="compra_tar_comp" t-value="compra_tar_comp + (b.cantidad * b.precio)" />
                               </t>
                               <t t-if="b.product_id.name  == 'Bolsa Plastica' ">
                                  <t t-set="cantidad_bolsa_plastica" t-value="cantidad_bolsa_plastica + b.cantidad" />
@@ -168,6 +193,42 @@
                                         <td >
                                             ₡
                                             <t t-esc="'{0:,.2f}'.format(int(compra_aluminio))" />
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="cantidad_bronce > 0 ">
+                                    <tr>
+                                        <td >Bronce</td>
+                                        <td >
+                                            <t t-esc="cantidad_bronce" />
+                                        </td>
+                                        <td >
+                                            ₡
+                                            <t t-esc="'{0:,.2f}'.format(int(compra_bronce))" />
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="cantidad_bateria > 0 ">
+                                    <tr>
+                                        <td >Bateria</td>
+                                        <td >
+                                            <t t-esc="cantidad_bateria" />
+                                        </td>
+                                        <td >
+                                            ₡
+                                            <t t-esc="'{0:,.2f}'.format(int(compra_cobre))" />
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="cantidad_cobre > 0 ">
+                                    <tr>
+                                        <td >Cobre</td>
+                                        <td >
+                                            <t t-esc="cantidad_cobre" />
+                                        </td>
+                                        <td >
+                                            ₡
+                                            <t t-esc="'{0:,.2f}'.format(int(compra_cobre))" />
                                         </td>
                                     </tr>
                                 </t>
@@ -245,6 +306,20 @@
 
                                     </tr>
                                 </t>
+                                <t t-if="cantidad_tar_comp > 0 ">
+                                    <tr>
+                                        <td > Tar Comp</td>
+                                        <td >
+                                            <t t-esc="cantidad_tar_comp" />
+                                        </td>
+                                        <td >
+                                            ₡
+                                            <t t-esc="'{0:,.2f}'.format(int(compra_tar_comp))" />
+                                        </td>
+
+                                    </tr>
+                                </t>
+
                                 <t t-if="cantidad_tetrabrick > 0 ">
                                     <tr>
                                         <td >Tetrabrick</td>
