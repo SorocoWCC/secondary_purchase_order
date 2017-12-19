@@ -132,6 +132,9 @@ class produccion_semanal(models.Model):
     state = fields.Selection ([('new','Nuevo'), ('progress', 'En Proceso'), ('closed','Cerrado')], string='state', readonly=True)
     name = fields.Char(compute='_action_name', string='Nombre', readonly=True)
     fecha_inicio = fields.Date(string='Fecha Inicio', required=True)
+    fecha_2 = fields.Date(string='Fecha Dia 2')
+    fecha_3 = fields.Date(string='Fecha Dia 3')
+    fecha_4 = fields.Date(string='Fecha Dia 4')
     fecha_final = fields.Date(string='Fecha Final',  required=True)
     orden_compra_ids = fields.One2many(comodel_name='orden_compra',inverse_name='produccion_semanal_id', string="Proveedores")
     notas= fields.Text(string='Notas')
@@ -150,6 +153,13 @@ class produccion_semanal(models.Model):
 # Generar lista de proveedores   
     @api.one
     def action_generar_lista(self):
+
+        fecha_date=datetime.strptime(self.fecha_inicio, '%Y-%m-%d')
+        self.fecha_2 = fecha_date + timedelta(days=1)
+        self.fecha_3 = fecha_date + timedelta(days=2)
+        self.fecha_3 = fecha_date + timedelta(days=3)
+        self.fecha_4 = fecha_date + timedelta(days=4)
+
         res= self.env['hr.employee'].search([('active', '=', 'True')])
         for employee in res:
                 if employee.department_id.name == str(self.hr_department_id.name) : 

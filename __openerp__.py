@@ -29,6 +29,7 @@
         'secondary_purchase_order_report.xml',
         'views/report_tiquete_compra_secondary.xml',
         'views/report_produccion_semanal.xml',
+        'views/report_produccion_diaria.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

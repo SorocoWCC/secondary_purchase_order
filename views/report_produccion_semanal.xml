@@ -21,8 +21,14 @@
             }</style>
                     <!-- Variables -->
                     <t t-set="cantidad_aluminio" t-value="0" />
+                    <t t-set="cantidad_aluminio_fecha_inicio" t-value="0" />
+                    <t t-set="cantidad_aluminio_fecha_2" t-value="0" />
+                    <t t-set="cantidad_aluminio_fecha_3" t-value="0" />
+                    <t t-set="cantidad_aluminio_fecha_4" t-value="0" />
+                    <t t-set="cantidad_aluminio_fecha_final" t-value="0" />
                     <t t-set="compra_aluminio" t-value="0" />
                     <t t-set="inversion_aluminio" t-value="0" />
+                   
                     <t t-set="cantidad_chatarra" t-value="0" />
                     <t t-set="compra_chatarra" t-value="0" />
                     <t t-set="cantidad_bronce" t-value="0" />
@@ -57,15 +63,30 @@
                     <t t-set="cantidad_bolsa_plastica" t-value="0" />
                     <t t-set="compra_bolsa_plastica" t-value="0" />
                     <t t-set="inversion_bolsa_plastica" t-value="0" />
+
+                    <t t-set="lista_fechas" t-value="[]" />
+
+ 
+   
                     <!-- Fin de Variables -->
+
                     <!-- Procesamiento de Productos -->
                     <t t-foreach="o.orden_compra_ids" t-as="i">
                         <t t-foreach="i.linea_compra_ids" t-as="b">
+
+
                             <t t-if="b.product_id.name == 'Aluminio' ">
                                 <t t-set="cantidad_aluminio" t-value="cantidad_aluminio + b.cantidad" />
                                 <t t-set="inversion_aluminio" t-value="inversion_aluminio + b.sub_total" />
                                 <t t-set="compra_aluminio" t-value="inversion_aluminio / cantidad_aluminio" />
+
+                                <t t-if="b.fecha == o.fecha_inicio">
+                                    hola lola
+                                </t>    
+
                             </t>
+
+
                             <t t-if="b.product_id.name == 'Bateria' ">
                                 <t t-set="cantidad_bateria" t-value="cantidad_bateria + b.cantidad" />
                                 <t t-set="inversion_bateria" t-value="inversion_bateria + b.sub_total" />
@@ -127,9 +148,12 @@
                     <div align="center">
                         <h4>
                             Produccion Semanal
-                            <span t-field="o.fecha_inicio" />
+                            inicio:<span t-field="o.fecha_inicio" />
                             al
-                            <span t-field="o.fecha_final" />
+                            final:<span t-field="o.fecha_final" /> 
+                            dia2<span t-field="o.fecha_2" />
+                            dia3<span t-field="o.fecha_3" />
+                            dia4<span t-field="o.fecha_4" />
                         </h4>
                     </div>
                     <!-- Resumen Semanal-->
@@ -335,7 +359,7 @@
                     <t t-set="total_saldos" t-value="0" />
                     <table>
                         <tr>
-                            <th style="text-align: center; background-color: #D8D8D8; border: 2px solid black" colspan="8">Resumen de Prestamos</th>
+                            <th style="text-align: center; background-color: #D8D8D8; border: 2px solid black" colspan="8">Resumen de Prestamos warren </th>
                         </tr>
                         <tr>
                             <th style="text-align: center; border: 2px solid black">Empleado</th>

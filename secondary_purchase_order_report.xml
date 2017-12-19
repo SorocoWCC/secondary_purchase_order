@@ -20,6 +20,14 @@
             file="Produccion Semanal" 
         />
 
+        <report 
+            string="Produccion Diaria" 
+            id="custom_report_produccion_diaria" 
+            model="produccion_semanal" 
+            report_type="qweb-pdf"
+            name="secondary_purchase_order.report_produccion_diaria_document" 
+            file="Produccion Diaria" 
+        />
         <record id="paperformat_lowmargin" model="report.paperformat">
             <field name="name">Punto de Venta</field>
             <field name="default" eval="True" />
@@ -57,6 +65,10 @@
         </record>
       
         <record id="secondary_purchase_order.custom_report_produccion_semanal" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="secondary_purchase_order.paperformat_lowmargin_cpo" />
+        </record>
+
+        <record id="secondary_purchase_order.custom_report_produccion_diaria" model="ir.actions.report.xml">
             <field name="paperformat_id" ref="secondary_purchase_order.paperformat_lowmargin_cpo" />
         </record>
 

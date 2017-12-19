@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <template id="report_produccion_diaria_document">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <style>table, td, th {
+              border: 1px solid black; 
+              text-align:center;
+              font-size: 20px; 
+            }
+
+            table {
+              border-collapse: collapse;
+              width: 100%;
+            }
+
+            td {
+              vertical-align: center;
+              font-size: 20px; 
+            }</style>
+                    <!-- Variables -->
+                    <t t-set="cantidad_aluminio" t-value="0" />
+                    <t t-set="cantidad_aluminio_fecha_inicio" t-value="0" />
+                    <t t-set="cantidad_aluminio_fecha_2" t-value="0" />
+                    <t t-set="cantidad_aluminio_fecha_3" t-value="0" />
+                    <t t-set="cantidad_aluminio_fecha_4" t-value="0" />
+                    <t t-set="cantidad_aluminio_fecha_final" t-value="0" />
+                    <t t-set="compra_aluminio" t-value="0" />
+                    <t t-set="inversion_aluminio" t-value="0" />
+                   
+                    <t t-set="cantidad_chatarra" t-value="0" />
+                    <t t-set="cantidad_chatarra_fecha_inicio" t-value="0" />
+                    <t t-set="cantidad_chatarra_fecha_2" t-value="0" />
+                    <t t-set="cantidad_chatarra_fecha_3" t-value="0" />
+                    <t t-set="cantidad_chatarra_fecha_4" t-value="0" />
+                    <t t-set="cantidad_chatarra_fecha_final" t-value="0" />
+                    <t t-set="compra_chatarra" t-value="0" />
+                    <t t-set="inversion_chatarra" t-value="0" />
+
+                    <t t-set="cantidad_bronce" t-value="0" />
+                    <t t-set="cantidad_bronce_fecha_inicio" t-value="0" />
+                    <t t-set="cantidad_bronce_fecha_2" t-value="0" />
+                    <t t-set="cantidad_bronce_fecha_3" t-value="0" />
+                    <t t-set="cantidad_bronce_fecha_4" t-value="0" />
+                    <t t-set="cantidad_bronce_fecha_final" t-value="0" />
+                    <t t-set="compra_bronce" t-value="0" />
+                    <t t-set="inversion_bronce" t-value="0" />
+
+                    <t t-set="cantidad_cobre" t-value="0" />
+                    <t t-set="cantidad_cobre_fecha_inicio" t-value="0" />
+                    <t t-set="cantidad_cobre_fecha_2" t-value="0" />
+                    <t t-set="cantidad_cobre_fecha_3" t-value="0" />
+                    <t t-set="cantidad_cobre_fecha_4" t-value="0" />
+                    <t t-set="cantidad_cobre_fecha_final" t-value="0" />
+                    <t t-set="compra_cobre" t-value="0" />
+                    <t t-set="cantidad_cobre" t-value="0" />
+                    <t t-set="inversion_cobre" t-value="0" />
+
+                    <t t-set="cantidad_bateria" t-value="0" />
+                    <t t-set="cantidad_bateria_fecha_inicio" t-value="0" />
+                    <t t-set="cantidad_bateria_fecha_2" t-value="0" />
+                    <t t-set="cantidad_bateria_fecha_3" t-value="0" />
+                    <t t-set="cantidad_bateria_fecha_4" t-value="0" />
+                    <t t-set="cantidad_bateria_fecha_final" t-value="0" />
+                    <t t-set="compra_bateria" t-value="0" />
+                    <t t-set="inversion_bateria" t-value="0" />
+
+                    <t t-set="cantidad_tar_comp" t-value="0" />
+                    <t t-set="cantidad_tar_comp_fecha_inicio" t-value="0" />
+                    <t t-set="cantidad_tar_comp_fecha_2" t-value="0" />
+                    <t t-set="cantidad_tar_comp_fecha_3" t-value="0" />
+                    <t t-set="cantidad_tar_comp_fecha_4" t-value="0" />
+                    <t t-set="cantidad_tar_comp_fecha_final" t-value="0" />
+                    <t t-set="compra_tar_comp" t-value="0" />
+                    <t t-set="inversion_tar_comp" t-value="0" />
+
+                    <t t-set="cantidad_papel_periodico" t-value="0" />
+                    <t t-set="cantidad_papel_periodico_fecha_inicio" t-value="0" />
+                    <t t-set="cantidad_papel_periodico_fecha_2" t-value="0" />
+                    <t t-set="cantidad_papel_periodico_fecha_3" t-value="0" />
+                    <t t-set="cantidad_papel_periodico_fecha_4" t-value="0" />
+                    <t t-set="cantidad_papel_periodico_fecha_final" t-value="0" />
+                    <t t-set="compra_papel_periodico" t-value="0" />
+                    <t t-set="inversion_papel_periodico" t-value="0" />
+
+                    <t t-set="cantidad_papel_primera" t-value="0" />
+                    <t t-set="cantidad_papel_primera_fecha_inicio" t-value="0" />
+                    <t t-set="cantidad_papel_primera_fecha_2" t-value="0" />
+                    <t t-set="cantidad_papel_primera_fecha_3" t-value="0" />
+                    <t t-set="cantidad_papel_primera_fecha_4" t-value="0" />
+                    <t t-set="cantidad_papel_primera_fecha_final" t-value="0" />
+                    <t t-set="compra_papel_primera" t-value="0" />
+                    <t t-set="inversion_papel_primera" t-value="0" />
+
+                    <t t-set="cantidad_papel_segunda" t-value="0" />
+                    <t t-set="cantidad_papel_segunda_fecha_inicio" t-value="0" />
+                    <t t-set="cantidad_papel_segunda_fecha_2" t-value="0" />
+                    <t t-set="cantidad_papel_segunda_fecha_3" t-value="0" />
+                    <t t-set="cantidad_papel_segunda_fecha_4" t-value="0" />
+                    <t t-set="cantidad_papel_segunda_fecha_final" t-value="0" />
+                    <t t-set="compra_papel_segunda" t-value="0" />
+                    <t t-set="inversion_papel_segunda" t-value="0" />
+
+                    <t t-set="cantidad_plastico_pet" t-value="0" />
+                    <t t-set="cantidad_plastico_pet_fecha_inicio" t-value="0" />
+                    <t t-set="cantidad_plastico_pet_fecha_2" t-value="0" />
+                    <t t-set="cantidad_plastico_pet_fecha_3" t-value="0" />
+                    <t t-set="cantidad_plastico_pet_fecha_4" t-value="0" />
+                    <t t-set="cantidad_plastico_pet_fecha_final" t-value="0" />
+                    <t t-set="compra_plastico_pet" t-value="0" />
+                    <t t-set="inversion_plastico_pet" t-value="0" />
+
+                    <t t-set="cantidad_tetrabrick" t-value="0" />
+                    <t t-set="cantidad_tetrabrick_fecha_inicio" t-value="0" />
+                    <t t-set="cantidad_tetrabrick_fecha_2" t-value="0" />
+                    <t t-set="cantidad_tetrabrick_fecha_3" t-value="0" />
+                    <t t-set="cantidad_tetrabrick_fecha_4" t-value="0" />
+                    <t t-set="cantidad_tetrabrick_fecha_final" t-value="0" />
+                    <t t-set="compra_tetrabrick" t-value="0" />
+                    <t t-set="inversion_tetrabrick" t-value="0" />
+
+                    <t t-set="cantidad_bolsa_plastica" t-value="0" />
+                    <t t-set="cantidad_bolsa_plastica_fecha_inicio" t-value="0" />
+                    <t t-set="cantidad_bolsa_plastica_fecha_2" t-value="0" />
+                    <t t-set="cantidad_bolsa_plastica_fecha_3" t-value="0" />
+                    <t t-set="cantidad_bolsa_plastica_fecha_4" t-value="0" />
+                    <t t-set="cantidad_bolsa_plastica_fecha_final" t-value="0" />
+                    <t t-set="compra_bolsa_plastica" t-value="0" />
+                    <t t-set="inversion_bolsa_plastica" t-value="0" />
+   
+                    <!-- Fin de Variables -->
+
+                    <!-- Procesamiento de Productos -->
+                    <t t-foreach="o.orden_compra_ids" t-as="i">
+                        <t t-foreach="i.linea_compra_ids" t-as="b">
+
+
+                            <t t-if="b.product_id.name == 'Aluminio' ">
+                                <t t-set="cantidad_aluminio" t-value="cantidad_aluminio + b.cantidad" />
+                                <t t-set="inversion_aluminio" t-value="inversion_aluminio + b.sub_total" />
+                                <t t-set="compra_aluminio" t-value="inversion_aluminio / cantidad_aluminio" />
+
+                                <t t-if="b.fecha == o.fecha_inicio">
+                                    
+                                    <t t-set="cantidad_aluminio_fecha_inicio" t-value="cantidad_aluminio_fecha_inicio + b.cantidad" />
+                                </t>
+
+                                <t t-if="b.fecha == o.fecha_2">
+                                    <t t-set="cantidad_aluminio_fecha_2" t-value="cantidad_aluminio_fecha_2 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_3">
+                                    <t t-set="cantidad_aluminio_fecha_3" t-value="cantidad_aluminio_fecha_3 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_4">
+                                    <t t-set="cantidad_aluminio_fecha_4" t-value="cantidad_aluminio_fecha_4 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_final">
+                                    <t t-set="cantidad_aluminio_fecha_final" t-value="cantidad_aluminio_fecha_final + b.cantidad" />
+                                </t> 
+                            </t>
+
+                            <t t-if="b.product_id.name == 'Bateria' ">
+                                <t t-set="cantidad_bateria" t-value="cantidad_bateria + b.cantidad" />
+                                <t t-set="inversion_bateria" t-value="inversion_bateria + b.sub_total" />
+                                <t t-set="compra_bateria" t-value="inversion_bateria / cantidad_bateria" />
+
+                                <t t-if="b.fecha == o.fecha_inicio">
+                                    
+                                    <t t-set="cantidad_bateria_fecha_inicio" t-value="cantidad_bateria_fecha_inicio + b.cantidad" />
+                                </t>
+
+                                <t t-if="b.fecha == o.fecha_2">
+                                    <t t-set="cantidad_bateria_fecha_2" t-value="cantidad_bateria_fecha_2 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_3">
+                                    <t t-set="cantidad_bateria_fecha_3" t-value="cantidad_bateria_fecha_3 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_4">
+                                    <t t-set="cantidad_bateria_fecha_4" t-value="cantidad_bateria_fecha_4 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_final">
+                                    <t t-set="cantidad_bateria_fecha_final" t-value="cantidad_bateria_fecha_final + b.cantidad" />
+                                </t> 
+                            </t>
+                            <t t-if="b.product_id.name == 'Bolsa Plastica' ">
+                                <t t-set="cantidad_bolsa_plastica" t-value="cantidad_bolsa_plastica + b.cantidad" />
+                                <t t-set="inversion_bolsa_plastica" t-value="inversion_bolsa_plastica + b.sub_total" />
+                                <t t-set="compra_bolsa_plastica" t-value="inversion_bolsa_plastica / cantidad_bolsa_plastica" />
+
+                                <t t-if="b.fecha == o.fecha_inicio">
+                                    
+                                    <t t-set="cantidad_bolsa_plastica_fecha_inicio" t-value="cantidad_bolsa_plastica_fecha_inicio + b.cantidad" />
+                                </t>
+
+                                <t t-if="b.fecha == o.fecha_2">
+                                    <t t-set="cantidad_bolsa_plastica_fecha_2" t-value="cantidad_bolsa_plastica_fecha_2 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_3">
+                                    <t t-set="cantidad_bolsa_plastica_fecha_3" t-value="cantidad_bolsa_plastica_fecha_3 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_4">
+                                    <t t-set="cantidad_bolsa_plastica_fecha_4" t-value="cantidad_bolsa_plastica_fecha_4 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_final">
+                                    <t t-set="cantidad_bolsa_plastica_fecha_final" t-value="cantidad_bolsa_plastica_fecha_final + b.cantidad" />
+                                </t> 
+                            </t>
+                            <t t-if="b.product_id.name == 'Bronce' ">
+                                <t t-set="cantidad_bronce" t-value="cantidad_bronce + b.cantidad" />
+                                <t t-set="inversion_bronce" t-value="inversion_bronce + b.sub_total" />
+                                <t t-set="compra_bronce" t-value="inversion_bronce / cantidad_bronce" />
+
+                                <t t-if="b.fecha == o.fecha_inicio">
+                                    
+                                    <t t-set="cantidad_bronce_fecha_inicio" t-value="cantidad_bronce_fecha_inicio + b.cantidad" />
+                                </t>
+
+                                <t t-if="b.fecha == o.fecha_2">
+                                    <t t-set="cantidad_bronce_fecha_2" t-value="cantidad_bronce_fecha_2 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_3">
+                                    <t t-set="cantidad_bronce_fecha_3" t-value="cantidad_bronce_fecha_3 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_4">
+                                    <t t-set="cantidad_bronce_fecha_4" t-value="cantidad_bronce_fecha_4 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_final">
+                                    <t t-set="cantidad_bronce_fecha_final" t-value="cantidad_bronce_fecha_final + b.cantidad" />
+                                </t> 
+                                
+                            </t>
+                            <t t-if="b.product_id.name == 'Chatarra' ">
+                                <t t-set="cantidad_chatarra" t-value="cantidad_chatarra + b.cantidad" />
+                                <t t-set="inversion_chatarra" t-value="inversion_chatarra + b.sub_total" />
+                                <t t-set="compra_chatarra" t-value="inversion_chatarra / cantidad_chatarra" />
+
+                                <t t-if="b.fecha == o.fecha_inicio">
+                                    
+                                    <t t-set="cantidad_chatarra_fecha_inicio" t-value="cantidad_chatarra_fecha_inicio + b.cantidad" />
+                                </t>
+
+                                <t t-if="b.fecha == o.fecha_2">
+                                    <t t-set="cantidad_chatarra_fecha_2" t-value="cantidad_chatarra_fecha_2 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_3">
+                                    <t t-set="cantidad_chatarra_fecha_3" t-value="cantidad_chatarra_fecha_3 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_4">
+                                    <t t-set="cantidad_chatarra_fecha_4" t-value="cantidad_chatarra_fecha_4 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_final">
+                                    <t t-set="cantidad_chatarra_fecha_final" t-value="cantidad_chatarra_fecha_final + b.cantidad" />
+                                </t> 
+                            </t>
+
+                            <t t-if="b.product_id.name == 'Cobre' ">
+                                <t t-set="cantidad_cobre" t-value="cantidad_cobre + b.cantidad" />
+                                <t t-set="inversion_cobre" t-value="inversion_cobre + b.sub_total" />
+                                <t t-set="compra_cobre" t-value="inversion_cobre / cantidad_cobre" />
+
+                                <t t-if="b.fecha == o.fecha_inicio">
+                                    
+                                    <t t-set="cantidad_cobre_fecha_inicio" t-value="cantidad_cobre_fecha_inicio + b.cantidad" />
+                                </t>
+
+                                <t t-if="b.fecha == o.fecha_2">
+                                    <t t-set="cantidad_cobre_fecha_2" t-value="cantidad_cobre_fecha_2 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_3">
+                                    <t t-set="cantidad_cobre_fecha_3" t-value="cantidad_cobre_fecha_3 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_4">
+                                    <t t-set="cantidad_cobre_fecha_4" t-value="cantidad_cobre_fecha_4 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_final">
+                                    <t t-set="cantidad_cobre_fecha_final" t-value="cantidad_cobre_fecha_final + b.cantidad" />
+                                </t> 
+                            </t>
+
+                            <t t-if="b.product_id.name == 'Papel Periodico' ">
+                                <t t-set="cantidad_papel_periodico" t-value="cantidad_papel_periodico + b.cantidad" />
+                                <t t-set="inversion_papel_periodico" t-value="inversion_papel_periodico + b.sub_total" />
+                                <t t-set="compra_papel_periodico" t-value="inversion_papel_periodico / cantidad_papel_periodico" />
+
+                                <t t-if="b.fecha == o.fecha_inicio">
+                                    
+                                    <t t-set="cantidad_papel_periodico_fecha_inicio" t-value="cantidad_papel_periodico_fecha_inicio + b.cantidad" />
+                                </t>
+
+                                <t t-if="b.fecha == o.fecha_2">
+                                    <t t-set="cantidad_papel_periodico_fecha_2" t-value="cantidad_papel_periodico_fecha_2 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_3">
+                                    <t t-set="cantidad_papel_periodico_fecha_3" t-value="cantidad_papel_periodico_fecha_3 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_4">
+                                    <t t-set="cantidad_papel_periodico_fecha_4" t-value="cantidad_papel_periodico_fecha_4 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_final">
+                                    <t t-set="cantidad_papel_periodico_fecha_final" t-value="cantidad_papel_periodico_fecha_final + b.cantidad" />
+                                </t> 
+
+                            </t>
+                            <t t-if="b.product_id.name == 'Papel Primera' ">
+                                <t t-set="cantidad_papel_primera" t-value="cantidad_papel_primera + b.cantidad" />
+                                <t t-set="inversion_papel_primera" t-value="inversion_papel_primera + b.sub_total" />
+                                <t t-set="compra_papel_primera" t-value="inversion_papel_primera / cantidad_papel_primera" />
+
+                                <t t-if="b.fecha == o.fecha_inicio">
+                                    
+                                    <t t-set="cantidad_papel_primera_fecha_inicio" t-value="cantidad_papel_primera_fecha_inicio + b.cantidad" />
+                                </t>
+
+                                <t t-if="b.fecha == o.fecha_2">
+                                    <t t-set="cantidad_papel_primera_fecha_2" t-value="cantidad_papel_primera_fecha_2 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_3">
+                                    <t t-set="cantidad_papel_primera_fecha_3" t-value="cantidad_papel_primera_fecha_3 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_4">
+                                    <t t-set="cantidad_papel_primera_fecha_4" t-value="cantidad_papel_primera_fecha_4 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_final">
+                                    <t t-set="cantidad_papel_primera_fecha_final" t-value="cantidad_papel_primera_fecha_final + b.cantidad" />
+                                </t> 
+
+                            </t>
+                            <t t-if="b.product_id.name == 'Papel Segunda' ">
+                                <t t-set="cantidad_papel_segunda" t-value="cantidad_papel_segunda + b.cantidad" />
+                                <t t-set="inversion_papel_segunda" t-value="inversion_papel_segunda + b.sub_total" />
+                                <t t-set="compra_papel_segunda" t-value="inversion_papel_segunda / cantidad_papel_segunda" />
+
+                                <t t-if="b.fecha == o.fecha_inicio">
+                                    
+                                    <t t-set="cantidad_papel_segunda_fecha_inicio" t-value="cantidad_papel_segunda_fecha_inicio + b.cantidad" />
+                                </t>
+
+                                <t t-if="b.fecha == o.fecha_2">
+                                    <t t-set="cantidad_papel_segunda_fecha_2" t-value="cantidad_papel_segunda_fecha_2 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_3">
+                                    <t t-set="cantidad_papel_segunda_fecha_3" t-value="cantidad_papel_segunda_fecha_3 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_4">
+                                    <t t-set="cantidad_papel_segunda_fecha_4" t-value="cantidad_papel_segunda_fecha_4 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_final">
+                                    <t t-set="cantidad_papel_segunda_fecha_final" t-value="cantidad_papel_segunda_fecha_final + b.cantidad" />
+                                </t> 
+
+                            </t>
+                            <t t-if="b.product_id.name == 'Plastico Pet' ">
+                                <t t-set="cantidad_plastico_pet" t-value="cantidad_plastico_pet + b.cantidad" />
+                                <t t-set="inversion_plastico_pet" t-value="inversion_plastico_pet + b.sub_total" />
+                                <t t-set="compra_plastico_pet" t-value="inversion_plastico_pet / cantidad_plastico_pet" />
+
+                                <t t-if="b.fecha == o.fecha_inicio">
+                                    
+                                    <t t-set="cantidad_tetrabrick_fecha_inicio" t-value="cantidad_tetrabrick_fecha_inicio + b.cantidad" />
+                                </t>
+
+                                <t t-if="b.fecha == o.fecha_2">
+                                    <t t-set="cantidad_tetrabrick_fecha_2" t-value="cantidad_tetrabrick_fecha_2 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_3">
+                                    <t t-set="cantidad_tetrabrick_fecha_3" t-value="cantidad_tetrabrick_fecha_3 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_4">
+                                    <t t-set="cantidad_tetrabrick_fecha_4" t-value="cantidad_tetrabrick_fecha_4 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_final">
+                                    <t t-set="cantidad_tetrabrick_fecha_final" t-value="cantidad_tetrabrick_fecha_final + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_inicio">
+                                    
+                                    <t t-set="cantidad_plastico_pet_fecha_inicio" t-value="cantidad_plastico_pet_fecha_inicio + b.cantidad" />
+                                </t>
+
+                                <t t-if="b.fecha == o.fecha_2">
+                                    <t t-set="cantidad_plastico_pet_fecha_2" t-value="cantidad_plastico_pet_fecha_2 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_3">
+                                    <t t-set="cantidad_plastico_pet_fecha_3" t-value="cantidad_plastico_pet_fecha_3 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_4">
+                                    <t t-set="cantidad_plastico_pet_fecha_4" t-value="cantidad_plastico_pet_fecha_4 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_final">
+                                    <t t-set="cantidad_plastico_pet_fecha_final" t-value="cantidad_plastico_pet_fecha_final + b.cantidad" />
+                                </t> 
+                            </t>
+
+                            <t t-if="b.product_id.name == 'Tar_Comp' ">
+                                <t t-set="cantidad_tar_comp" t-value="cantidad_tar_comp + b.cantidad" />
+                                <t t-set="inversion_tar_comp" t-value="inversion_tar_comp + b.sub_total" />
+                                <t t-set="compra_tar_comp" t-value="inversion_tar_comp / cantidad_tar_comp" />
+
+                                <t t-if="b.fecha == o.fecha_inicio">
+                                    
+                                    <t t-set="cantidad_tar_comp_fecha_inicio" t-value="cantidad_tar_comp_fecha_inicio + b.cantidad" />
+                                </t>
+
+                                <t t-if="b.fecha == o.fecha_2">
+                                    <t t-set="cantidad_tar_comp_fecha_2" t-value="cantidad_tar_comp_fecha_2 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_3">
+                                    <t t-set="cantidad_tar_comp_fecha_3" t-value="cantidad_tar_comp_fecha_3 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_4">
+                                    <t t-set="cantidad_tar_comp_fecha_4" t-value="cantidad_tar_comp_fecha_4 + b.cantidad" />
+                                </t> 
+
+                                <t t-if="b.fecha == o.fecha_final">
+                                    <t t-set="cantidad_tar_comp_fecha_final" t-value="cantidad_tar_comp_fecha_final + b.cantidad" />
+                                </t> 
+
+                            </t>
+                            <t t-if="b.product_id.name == 'Tetrabrick' ">
+                                <t t-set="cantidad_tetrabrick" t-value="cantidad_tetrabrick + b.cantidad" />
+                                <t t-set="inversion_tetrabrick" t-value="inversion_tetrabrick + b.sub_total" />
+                                <t t-set="compra_tetrabrick" t-value="inversion_tetrabrick / cantidad_tetrabrick" />
+                            </t>
+                        </t>
+                    </t>
+                    <!-- Fin Procesamiento de Productos -->
+                    <div align="center">
+                        <h4>
+                            Produccion Diaria <span t-field="o.fecha_inicio" /> al <span t-field="o.fecha_final" /> 
+                        </h4>
+                    </div>
+                    <!-- Resumen Semanal-->
+                    <table style="border: 2px solid black; text-align: center; align=center; width:100%">
+                        <tr>
+                            <th colspan="7" style="text-align: center; background-color: #D8D8D8; border: 2px solid black">Detalles de compra por producto</th>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center;border: 2px solid black">Producto</th>
+                            <th style="text-align: center;border: 2px solid black">Día 1</th>
+                            <th style="text-align: center;border: 2px solid black">Día 2</th>
+                            <th style="text-align: center;border: 2px solid black">Día 3</th>
+                            <th style="text-align: center;border: 2px solid black">Día 4</th>
+                            <th style="text-align: center;border: 2px solid black">Día 5</th>
+                            <th style="text-align: center;border: 2px solid black">Total</th>
+                        </tr>
+                        <t t-if="cantidad_aluminio &gt; 0 ">
+                            <tr>
+                                <td style="text-align: center;border: 2px solid black">Aluminio</td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_aluminio_fecha_inicio" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_aluminio_fecha_2" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_aluminio_fecha_3" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_aluminio_fecha_4" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_aluminio_fecha_final" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_aluminio" />
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="cantidad_bateria &gt; 0 ">
+                            <tr>
+                                <td style="text-align: center;border: 2px solid black">Bateria</td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_bateria_fecha_inicio" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_bateria_fecha_2" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_bateria_fecha_3" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_bateria_fecha_4" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_bateria_fecha_final" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_bateria" />
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="cantidad_bronce &gt; 0 ">
+                            <tr>
+                                <td style="text-align: center;border: 2px solid black">Bronce</td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_bronce_fecha_inicio" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_bronce_fecha_2" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_bronce_fecha_3" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_bronce_fecha_4" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_bronce_fecha_final" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_bronce" />
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="cantidad_chatarra &gt; 0 ">
+                            <tr>
+                                <td style="text-align: center;border: 2px solid black">Chatarra</td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_chatarra_fecha_inicio" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_chatarra_fecha_2" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_chatarra_fecha_3" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_chatarra_fecha_4" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_chatarra_fecha_final" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_chatarra" />
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="cantidad_cobre &gt; 0 ">
+                            <tr>
+                                <td style="text-align: center;border: 2px solid black">Cobre</td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_cobre_fecha_inicio" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_cobre_fecha_2" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_cobre_fecha_3" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_cobre_fecha_4" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_cobre_fecha_final" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_cobre" />
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="cantidad_bolsa_plastica &gt; 0 ">
+                            <tr>
+                                <td style="text-align: center;border: 2px solid black">Bolsa Plastica</td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_bolsa_plastica_fecha_inicio" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_bolsa_plastica_fecha_2" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_bolsa_plastica_fecha_3" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_bolsa_plastica_fecha_4" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_bolsa_plastica_fecha_final" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_bolsa_plastica" />
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="cantidad_papel_periodico &gt; 0 ">
+                            <tr>
+                                <td style="text-align: center;border: 2px solid black">Papel Periodico</td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_papel_periodico_fecha_inicio" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_papel_periodico_fecha_2" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_papel_periodico_fecha_3" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_papel_periodico_fecha_4" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_papel_periodico_fecha_final" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_papel_periodico" />
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="cantidad_papel_primera &gt; 0 ">
+                            <tr>
+                                <td style="text-align: center;border: 2px solid black">Papel Primera</td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_papel_primera_fecha_inicio" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_papel_primera_fecha_2" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_papel_primera_fecha_3" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_papel_primera_fecha_4" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_papel_primera_fecha_final" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_papel_primera" />
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="cantidad_papel_segunda &gt; 0 ">
+                            <tr>
+                                <td style="text-align: center;border: 2px solid black">Papel Segunda</td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_papel_segunda_fecha_inicio" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_papel_segunda_fecha_2" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_papel_segunda_fecha_3" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_papel_segunda_fecha_4" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_papel_segunda_fecha_final" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_papel_segunda" />
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="cantidad_plastico_pet > 0 ">
+                            <tr>
+                                <td style="text-align: center;border: 2px solid black">Plastico Pet</td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_plastico_pet_fecha_inicio" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_plastico_pet_fecha_2" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_plastico_pet_fecha_3" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_plastico_pet_fecha_4" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_plastico_pet_fecha_final" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_plastico_pet" />
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="cantidad_tetrabrick &gt; 0 ">
+                            <tr>
+                                <td style="text-align: center;border: 2px solid black">Tetrabrick</td>
+                                 <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_tetrabrick_fecha_inicio" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_tetrabrick_fecha_2" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_tetrabrick_fecha_3" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_tetrabrick_fecha_4" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_tetrabrick_fecha_final" />
+                                </td>
+                                <td style="text-align: center;border: 2px solid black">
+                                    <t t-esc="cantidad_tetrabrick" />
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+                    <div style="height: 40px;" />
+                    <br />
+                </div>
+            </t>
+        </template>
+    </data>
+</openerp>
+
