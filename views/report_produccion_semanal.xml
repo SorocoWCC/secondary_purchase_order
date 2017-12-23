@@ -79,11 +79,6 @@
                                 <t t-set="cantidad_aluminio" t-value="cantidad_aluminio + b.cantidad" />
                                 <t t-set="inversion_aluminio" t-value="inversion_aluminio + b.sub_total" />
                                 <t t-set="compra_aluminio" t-value="inversion_aluminio / cantidad_aluminio" />
-
-                                <t t-if="b.fecha == o.fecha_inicio">
-                                    hola lola
-                                </t>    
-
                             </t>
 
 
@@ -151,9 +146,6 @@
                             inicio:<span t-field="o.fecha_inicio" />
                             al
                             final:<span t-field="o.fecha_final" /> 
-                            dia2<span t-field="o.fecha_2" />
-                            dia3<span t-field="o.fecha_3" />
-                            dia4<span t-field="o.fecha_4" />
                         </h4>
                     </div>
                     <!-- Resumen Semanal-->
