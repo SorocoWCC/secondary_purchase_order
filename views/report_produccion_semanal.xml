@@ -143,9 +143,9 @@
                     <div align="center">
                         <h4>
                             Produccion Semanal
-                            inicio:<span t-field="o.fecha_inicio" />
+                            <span t-field="o.fecha_inicio" />
                             al
-                            final:<span t-field="o.fecha_final" /> 
+                            <span t-field="o.fecha_final" /> 
                         </h4>
                     </div>
                     <!-- Resumen Semanal-->

@@ -384,27 +384,6 @@
 
                                 <t t-if="b.fecha == o.fecha_inicio">
                                     
-                                    <t t-set="cantidad_tetrabrick_fecha_inicio" t-value="cantidad_tetrabrick_fecha_inicio + b.cantidad" />
-                                </t>
-
-                                <t t-if="b.fecha == o.fecha_2">
-                                    <t t-set="cantidad_tetrabrick_fecha_2" t-value="cantidad_tetrabrick_fecha_2 + b.cantidad" />
-                                </t> 
-
-                                <t t-if="b.fecha == o.fecha_3">
-                                    <t t-set="cantidad_tetrabrick_fecha_3" t-value="cantidad_tetrabrick_fecha_3 + b.cantidad" />
-                                </t> 
-
-                                <t t-if="b.fecha == o.fecha_4">
-                                    <t t-set="cantidad_tetrabrick_fecha_4" t-value="cantidad_tetrabrick_fecha_4 + b.cantidad" />
-                                </t> 
-
-                                <t t-if="b.fecha == o.fecha_final">
-                                    <t t-set="cantidad_tetrabrick_fecha_final" t-value="cantidad_tetrabrick_fecha_final + b.cantidad" />
-                                </t> 
-
-                                <t t-if="b.fecha == o.fecha_inicio">
-                                    
                                     <t t-set="cantidad_plastico_pet_fecha_inicio" t-value="cantidad_plastico_pet_fecha_inicio + b.cantidad" />
                                 </t>
 
