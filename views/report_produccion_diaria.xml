@@ -471,11 +471,11 @@
                         </tr>
                         <tr>
                             <th style="text-align: center;border: 2px solid black">Producto</th>
-                            <th style="text-align: center;border: 2px solid black">Día 1</th>
-                            <th style="text-align: center;border: 2px solid black">Día 2</th>
-                            <th style="text-align: center;border: 2px solid black">Día 3</th>
-                            <th style="text-align: center;border: 2px solid black">Día 4</th>
-                            <th style="text-align: center;border: 2px solid black">Día 5</th>
+                            <th style="text-align: center;border: 2px solid black"><span t-field="o.fecha_inicio" /></th>
+                            <th style="text-align: center;border: 2px solid black"><span t-field="o.fecha_2" /></th>
+                            <th style="text-align: center;border: 2px solid black"><span t-field="o.fecha_3" /></th>
+                            <th style="text-align: center;border: 2px solid black"><span t-field="o.fecha_4" /></th>
+                            <th style="text-align: center;border: 2px solid black"><span t-field="o.fecha_final" /></th>
                             <th style="text-align: center;border: 2px solid black">Total</th>
                         </tr>
                         <t t-if="cantidad_aluminio &gt; 0 ">

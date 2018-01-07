@@ -157,8 +157,7 @@ class produccion_semanal(models.Model):
         fecha_date=datetime.strptime(self.fecha_inicio, '%Y-%m-%d')
         self.fecha_2 = fecha_date + timedelta(days=1)
         self.fecha_3 = fecha_date + timedelta(days=2)
-        self.fecha_3 = fecha_date + timedelta(days=3)
-        self.fecha_4 = fecha_date + timedelta(days=4)
+        self.fecha_4 = fecha_date + timedelta(days=3)
 
         res= self.env['hr.employee'].search([('active', '=', 'True')])
         for employee in res:
